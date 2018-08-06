@@ -3,5 +3,9 @@
 # ID="rhel" or "fedora"
 type_os=$(cat /etc/os-release | grep -w ID)
 
-# remove all the installed packages that may have run in the previous playbook
-sudo yum remove lvm2 parted xfsprogs e2fsprogs util-linux -y ;
+# need to remove one at a time as some may fail
+sudo yum remove lvm2 -y;
+sudo yum remove parted -y ;
+sudo yum remove xfsprogs -y ;
+sudo yum remove e2fsprogs -y;
+sudo yum remove util-linux -y ;
