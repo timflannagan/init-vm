@@ -1,12 +1,11 @@
 #! /usr/bin/bash
 
-# ID="rhel" or "fedora"
-type_os=$(cat /etc/os-release | grep -w ID)
+# get rid of any mounts first
+sudo umount /dev/mapper/*test*
 
-# need to remove one at a time as some may fail
-sudo yum remove lvm2 -y
-sudo yum remove parted -y
-sudo yum remove xfsprogs -y
-sudo yum remove e2fsprogs -y
-# Cannot remove util-linux due to systemd
-# sudo yum remove util-linux -y
+# get rid of any lvs
+sudo lvremove /dev/mapper/*test* -y
+
+# TO-DO:
+# 1. modify /etc/fstab file
+# 2. add umount for /dev/ disk device 
