@@ -1,13 +1,19 @@
 #! /usr/bin/bash
 
-# get rid of any mounts first
-sudo umount /opt/test*
+USAGE="./cleanup clean_storage_and_packages"
 
-# get rid of any lvs
-sudo lvremove /dev/mapper/*test* -y
+echo $USAGE
 
-sudo emacs /etc/fstab
-
-# TO-DO:
-# 1. modify /etc/fstab file
-# 2. add umount for /dev/ disk device
+if [[ $# -eq 0 ]]
+then
+  sudo umount /opt/test*
+  sudo lvremove /dev/mapper/*test* -y
+  # to-do: make emacs automatically go the bottom of the file
+  # sudo emacs /etc/fstab
+elif [ $1 == 1 ]
+then
+  sudo umount /opt/test*
+  sudo lvremove /dev/mapper/*test* -y
+  sudo emacs /etc/fstab
+  sudo yum remove lvm2 e2fsprogs xfsprogs parted -y
+fi
