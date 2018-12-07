@@ -8,8 +8,8 @@ if [[ $# -eq 0 ]]
 then
   sudo umount /opt/test*
   sudo lvremove /dev/mapper/*test* -y
-  # to-do: make emacs automatically go the bottom of the file
-  # sudo emacs /etc/fstab
+  sudo wipefs -a /dev/vdb /dev/vdc /dev/vdd
+  sudo emacs /etc/fstab
 elif [ $1 == 1 ]
 then
   sudo umount /opt/test*
